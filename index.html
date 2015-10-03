@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Angular-pusher : Pusher events bridge to angular events">
+
+    <link type="image/x-icon" rel="icon" href="favicon.ico" />
+	<link type="image/x-icon" rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Angular-pusher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/3.0.0/pusher.js"></script>
+    <script src="https://rawgit.com/Disparity/angular-pusher/master/angular-pusher.js"></script>
+
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Disparity/angular-pusher">View on GitHub</a>
+
+          <h1 id="project_title">Angular-pusher</h1>
+          <h2 id="project_tagline">This library is an open source angular bridge to the <a href="https://pusher.com/">Pusher</a>.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Disparity/angular-pusher/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Disparity/angular-pusher/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <!-- README.md -->
+
+<article class="markdown-body entry-content" itemprop="mainContentOfPage">
+<h2><a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3><a id="user-content-bower" class="anchor" href="#bower" aria-hidden="true"><span class="octicon octicon-link"></span></a>Bower</h3>
+
+<pre><code>bower install angular-pusher-bridge
+</code></pre>
+
+<p>and then</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>bower_components/angular-pusher-bridge/angular-pusher.min.js<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h3><a id="user-content-npm" class="anchor" href="#npm" aria-hidden="true"><span class="octicon octicon-link"></span></a>NPM</h3>
+
+<pre><code>npm install angular-pusher-bridge
+</code></pre>
+
+<p>and then</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>node_modules/angular-pusher-bridge/angular-pusher.min.js<span class="pl-pds">"</span></span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<h2><a id="user-content-configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>The service provider provides the following methods:</p>
+
+<ul>
+<li><code>.setApiKey('KEY')</code> - set pusher application key;</li>
+<li><code>.option(name, value)</code> or <code>.option({name: value})</code> - Configuring the pusher's client. <a href="https://pusher.com/docs/client_api_guide/client_connect#options_parameter">Available pusher options</a>;</li>
+<li><code>.subscribe(channel)</code> - subscribe to the channel events;</li>
+<li><code>.alias(channel, alias)</code> or <code>.alias({channel: alias})</code> - set alias for channel</li>
+</ul>
+
+<p>These methods are available during configuration through pusherProvider. At run time, the following methods are changing their behavior:</p>
+
+<ul>
+<li><code>.option(name)</code> - return pusher's option value;</li>
+</ul>
+
+<h3><a id="user-content-enable-debugging" class="anchor" href="#enable-debugging" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enable debugging</h3>
+
+<p><code>.option('debug', true)</code> - enable logging (via $log) all events (default: false)</p>
+
+<h3><a id="user-content-debounce-digest" class="anchor" href="#debounce-digest" aria-hidden="true"><span class="octicon octicon-link"></span></a>Debounce $digest</h3>
+<p><code>.option('debounce', int)</code> - enable debounce $rootScope.$digest. Run $digest after 'milliseconds' (default: 50)</p>
+
+<h2><a id="user-content-binding-to-events" class="anchor" href="#binding-to-events" aria-hidden="true"><span class="octicon octicon-link"></span></a>Binding to events</h2>
+
+<p>This module is designed for integration events received through the pusher, into the system event angular.
+Events propagate from $rootScope.</p>
+
+<div class="highlight highlight-source-js"><pre>$scope.$on(<span class="pl-s"><span class="pl-pds">'</span>channel:event<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">angularEvent</span>, <span class="pl-smi">pusherEventData</span>) {
+    $log.<span class="pl-c1">debug</span>(pusherEventData);
+});</pre></div>
+
+<p>or</p>
+
+<div class="highlight highlight-source-js"><pre>$scope.$on(<span class="pl-s"><span class="pl-pds">'</span>global_event<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">angularEvent</span>, <span class="pl-smi">pusherEventData</span>) {
+    $log.<span class="pl-c1">debug</span>(pusherEventData);
+});</pre></div>
+
+<p>If the channel has been set an alias, the name of the event instead of the name of the channel will be used an alias:</p>
+
+<div class="highlight highlight-source-js"><pre>pusherProvider.alias(<span class="pl-s"><span class="pl-pds">'</span>channel<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>alias<span class="pl-pds">'</span></span>);
+$scope.$on(<span class="pl-s"><span class="pl-pds">'</span>alias:event<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">angularEvent</span>, <span class="pl-smi">pusherEventData</span>) {
+    $log.<span class="pl-c1">debug</span>(pusherEventData);
+});</pre></div>
+
+<h2><a id="user-content-examples" class="anchor" href="#examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Examples</h2>
+
+<div class="highlight highlight-source-js"><pre>angular.module(<span class="pl-s"><span class="pl-pds">'</span>app<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>angular-pusher<span class="pl-pds">'</span></span>])
+    .config([<span class="pl-s"><span class="pl-pds">'</span>pusherProvider<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">provider</span>) {
+        provider.setApiKey(<span class="pl-s"><span class="pl-pds">'</span>XXXXX<span class="pl-pds">'</span></span>);
+        provider.option({
+            debug<span class="pl-k">:</span> <span class="pl-c1">true</span>,
+            cluster<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>eu<span class="pl-pds">'</span></span>
+        });
+        <span class="pl-c">// subscribe to channel during configuration.</span>
+        provider.subscribe(<span class="pl-s"><span class="pl-pds">'</span>my_channel<span class="pl-pds">'</span></span>);
+        <span class="pl-c">// subscribe to dynamic generation channel name</span>
+        provider.subscribe(<span class="pl-s"><span class="pl-pds">'</span>private-channel-<span class="pl-pds">'</span></span> <span class="pl-k">+</span> user.<span class="pl-c1">id</span>);
+        <span class="pl-c">// making dynamic name - static, by specifying an alias</span>
+        provider.alias(<span class="pl-s"><span class="pl-pds">'</span>private-channel-<span class="pl-pds">'</span></span> <span class="pl-k">+</span> user.<span class="pl-c1">id</span>, <span class="pl-s"><span class="pl-pds">'</span>personal-events<span class="pl-pds">'</span></span>);
+    }])
+    .controller(<span class="pl-s"><span class="pl-pds">'</span>ctrl<span class="pl-pds">'</span></span>, [<span class="pl-s"><span class="pl-pds">'</span>$scope<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>$window<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>pusher<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>pusherProvider<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">$scope</span>, <span class="pl-smi">$window</span>, <span class="pl-smi">pusher</span>, <span class="pl-smi">pusherProvider</span>) {
+        <span class="pl-c">// subscribe to channel in runtime</span>
+        pusherProvider.subscribe(<span class="pl-s"><span class="pl-pds">'</span>runtime_channel<span class="pl-pds">'</span></span>);
+        <span class="pl-c">// Bind listeners</span>
+        $scope.$on(<span class="pl-s"><span class="pl-pds">'</span>my_channel:new_message<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">event</span>, <span class="pl-smi">data</span>) {
+            $window.<span class="pl-c1">alert</span>($window.JSON.stringify(data));
+        });
+        $scope.$on(<span class="pl-s"><span class="pl-pds">'</span>personal-events:new_message<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">event</span>, <span class="pl-smi">data</span>) {
+            $window.<span class="pl-c1">alert</span>($window.JSON.stringify(data));
+        });
+        <span class="pl-c">// use original pusher client</span>
+        pusher;
+    }])</pre></div>
+
+
+</article>
+
+        <!-- /README.md -->
+
+        <h2><a id="user-content-demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+        <div class="highlight highlight-text-html-basic" ng-app="app" ng-controller="ctrl">
+            <pre style="height: 200px; overflow: auto;"><!--
+             --><div ng-repeat="event in events" style="ng-cloak"><!--
+                 -->{{ event.date|date:'HH:mm:ss' }} <span style="display: inline-block; vertical-align: top;">{{ event.data|json }}</span>
+
+<!--         --></div>
+<!--     --></pre>
+        </div>
+        <p class="pl-mi">*Server-side script once a minute dispatches an event (if my PaaS instance not down), which appears in the window above.</p>
+        <script type="text/javascript">
+            angular.module('app', ['angular-pusher'])
+                .config(['pusherProvider', function (provider) {
+                    provider.setApiKey('2c235eb19bfad0045e60');
+                    provider.option('disableStats', true);
+                    provider.subscribe('my_channel');
+                }])
+                .controller('ctrl', ['$scope', function ($scope) {
+                    $scope.events = [];
+                    $scope.$on('my_channel:new_message', function (event, data) {
+                        $scope.events.unshift({date: new Date(), data: data});
+                    });
+                }])
+            ;
+        </script>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Angular-pusher maintained by <a href="https://github.com/Disparity">Disparity</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+        <p>
+            <a target="_blank" style="float: left;" href="https://openshift.com/" title="Thanks for PaaS"><img alt="" style="width: 270px;" class="clear-img" src="images/openshift-logo.svg" /></a>
+            <a target="_blank" style="float: right;" href="https://pusher.com"><img alt="" style="width: 111px;" class="clear-img" src="images/pusher_logo_white.png" /></a>
+        </p>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-68396790-1");
+        pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
+
+
+  </body>
+</html>
