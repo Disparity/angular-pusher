@@ -1,0 +1,28 @@
+{
+  "name": "angular-pusher",
+  "version": "0.1.0",
+  "description": "Pusher to angular bridge",
+  "main": "angular-pusher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Disparity/angular-pusher.git"
+  },
+  "keywords": [
+    "angular-module",
+    "pusher",
+    "angular-pusher"
+  ],
+  "dependencies": {
+    "angular": "~1.0",
+    "pusher": "~3.0"
+  },
+  "author": "Disparity <disparity-github@yandex.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Disparity/angular-pusher/issues"
+  },
+  "homepage": "https://github.com/Disparity/angular-pusher#readme"
+}
