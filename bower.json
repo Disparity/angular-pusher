@@ -1,11 +1,12 @@
 {
-  "name": "angular-pusher",
+  "name": "angular-pusher-bridge",
   "main": "angular-pusher.js",
   "homepage": "https://github.com/Disparity/angular-pusher",
   "authors": [
-    "Disparity <disparity-github@yandex.ru>"
+    {"name": "Disparity", "email": "disparity-github@yandex.ru"}
   ],
   "description": "Pusher to angular bridge",
+  "homepage": "https://disparity.github.io/angular-pusher/",
   "moduleType": [],
   "dependencies": {
     "angular": "~1.0",
