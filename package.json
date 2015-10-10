@@ -1,5 +1,5 @@
 {
-  "name": "angular-pusher",
+  "name": "angular-pusher-bridge",
   "version": "0.1.0",
   "description": "Pusher to angular bridge",
   "main": "angular-pusher.js",
@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "angular": "~1.0",
-    "pusher": "~3.0"
+    "pusher-js": "~3.0"
   },
   "author": "Disparity <disparity-github@yandex.ru>",
   "license": "MIT",

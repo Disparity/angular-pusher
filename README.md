@@ -1,9 +1,13 @@
-# angular-pusher
-Pusher events bridge to angular events
+# Angular-pusher bridge
+This library is an open source angular bridge to the [Pusher](https://pusher.com/).
 
-https://disparity.github.io/angular-pusher/
+## Usage overview
 
-## Usage
+### Installation
+
+### Configuration
+
+### Binding to events
 ```javascript
 angular.module('app', ['angular-pusher'])
     .config(['pusherProvider', function (provider) {
@@ -16,3 +20,8 @@ angular.module('app', ['angular-pusher'])
         });
     }])
 ```
+
+
+### Demo
+
+https://disparity.github.io/angular-pusher/
