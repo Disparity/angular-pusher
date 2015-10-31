@@ -34,6 +34,9 @@ These methods are available during configuration through pusherProvider. At run 
 ### Enable debugging
 `.option('debug', true)` - enable logging (via $log) all events (default: false)
 
+### Debounce $digest
+`.option('debounce', int)` - enable debounce $rootScope.$digest. Run $digest after 'milliseconds' (default: 50)
+
 ## Binding to events
 This module is designed for integration events received through the pusher, into the system event angular.
 Events propagate from $rootScope.
